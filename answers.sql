@@ -1,26 +1,15 @@
--- Week 4 Database Assignment: Advanced SQL Queries and Aggregations
+-- Week 5 Database Assignment: Indexing and Optimization
 -- File: answers.sql
+-- Database: sales (MySQL)
 
-USE sales;
+-- Question 1: Drop the index IdxPhone from the customers table
+DROP INDEX IdxPhone ON customers;
 
--- Question 1: Total payment amount for each payment date (top 5 latest)
-SELECT paymentDate, SUM(amount) AS totalAmount
-FROM payments
-GROUP BY paymentDate
-ORDER BY paymentDate DESC
-LIMIT 5;
+-- Question 2: Create user 'bob' with password 'S$cu3r3!' restricted to localhost
+CREATE USER 'bob'@'localhost' IDENTIFIED BY 'S$cu3r3!';
 
--- Question 2: Average credit limit per customer
-SELECT customerName, country, AVG(creditLimit) AS averageCreditLimit
-FROM customers
-GROUP BY customerName, country;
+-- Question 3: Grant INSERT privilege to user 'bob' on the salesDB database
+GRANT INSERT ON salesDB.* TO 'bob'@'localhost';
 
--- Question 3: Total price of products ordered
-SELECT productCode, quantityOrdered, SUM(quantityOrdered * priceEach) AS totalPrice
-FROM orderdetails
-GROUP BY productCode, quantityOrdered;
-
--- Question 4: Highest payment amount per check number
-SELECT checkNumber, MAX(amount) AS highestAmount
-FROM payments
-GROUP BY checkNumber;
+-- Question 4: Change the password for user 'bob' to 'P$55!23'
+ALTER USER 'bob'@'localhost' IDENTIFIED BY 'P$55!23';
